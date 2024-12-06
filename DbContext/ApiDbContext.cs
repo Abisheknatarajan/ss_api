@@ -1,12 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using DatabaseModels;
+﻿using DatabaseModels;
 using Microsoft.EntityFrameworkCore;
 
 namespace Context;
 
-public partial class ApiDbContext : DbContext  // Marking as partial class
+public partial class ApiDbContext : DbContext
 {
+    
     public ApiDbContext(DbContextOptions<ApiDbContext> options)
         : base(options)
     {
@@ -15,26 +14,38 @@ public partial class ApiDbContext : DbContext  // Marking as partial class
     public virtual DbSet<User> Users { get; set; }
 
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-    {
-        // Warning regarding connection string here
-        optionsBuilder.UseSqlServer("Server=DESKTOP-5R7V2DJ\\SQLEXPRESS;Database=SystemStatus;Trusted_Connection=True;TrustServerCertificate=True");
-    }
+#warning To protect potentially sensitive information in your connection string, you should move it out of source code. You can avoid scaffolding the connection string by using the Name= syntax to read it from configuration - see https://go.microsoft.com/fwlink/?linkid=2131148. For more guidance on storing connection strings, see https://go.microsoft.com/fwlink/?LinkId=723263.
+        => optionsBuilder.UseSqlServer("Server=DESKTOP-4I5REH5;Database=SystemUsage;Trusted_Connection=True;TrustServerCertificate=True");
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
         modelBuilder.Entity<User>(entity =>
         {
-            entity.HasKey(e => e.UserId).HasName("PK__Users__1788CCACA57B3914");
+            entity.HasKey(e => e.UserId).HasName("PK__User__1788CC4C44B17350");
 
-            entity.Property(e => e.UserId).HasColumnName("UserID");
+            entity.ToTable("User");
+
+            entity.HasIndex(e => e.Email, "UQ__User__A9D105342CD1A2D8").IsUnique();
+
+            entity.Property(e => e.CreatedAt)
+                .HasDefaultValueSql("(getdate())")
+                .HasColumnType("datetime");
+            entity.Property(e => e.Email)
+                .HasMaxLength(255)
+                .IsUnicode(false);
+            entity.Property(e => e.Password)
+                .HasMaxLength(255)
+                .IsUnicode(false);
+            entity.Property(e => e.UpdatedAt)
+                .HasDefaultValueSql("(getdate())")
+                .HasColumnType("datetime");
             entity.Property(e => e.UserName)
                 .HasMaxLength(255)
                 .IsUnicode(false);
         });
 
-        OnModelCreatingPartial(modelBuilder);  // Calls partial method
+        OnModelCreatingPartial(modelBuilder);
     }
 
-    partial void OnModelCreatingPartial(ModelBuilder modelBuilder);  // Partial method definition
+    partial void OnModelCreatingPartial(ModelBuilder modelBuilder);
 }
-
