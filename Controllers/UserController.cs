@@ -94,6 +94,7 @@ public class UserController : ControllerBase
         try
         {
             var result = _userUseCase.userBy(request);
+
             return Ok(new { Success = true, Data = result });
         }
         catch (Exception ex)

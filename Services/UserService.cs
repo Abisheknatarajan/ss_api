@@ -28,5 +28,4 @@ public class UserService : IUserService
     {
         return Repository.userBy(request);
     }
-
 }

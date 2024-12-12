@@ -55,7 +55,6 @@ public class UserRepository : IUserRepository
         var systemList = Context.Users.Select(s => new UserEntity
         {
             Name = s.UserName,
-            Role = s.Role
         })
             .ToList();
 
