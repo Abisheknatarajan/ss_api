@@ -18,19 +18,19 @@ public static class ConfigureUtils
     private static void SetUseCase(IServiceCollection services)
     {
         services.AddScoped<IHomeUseCase, HomeUseCase>();
+        services.AddScoped<IUserUseCase, UserUseCase>();
 
     }
 
     private static void SetService(IServiceCollection services)
     {
         services.AddScoped<IHomeService, HomeService>();
-
+        services.AddScoped<IUserService, UserService>();
     }
 
     private static void SetRepository(IServiceCollection services)
     {
         services.AddScoped<IHomeRepository, HomeRepository>();
-
-
+        services.AddScoped<IUserRepository, UserRepository>();
     }
 }
