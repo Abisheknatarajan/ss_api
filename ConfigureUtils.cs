@@ -19,13 +19,14 @@ public static class ConfigureUtils
     {
         services.AddScoped<IHomeUseCase, HomeUseCase>();
         services.AddScoped<ILoginAuthenticationUseCase, LoginAuthenticationUseCase>();
-
+        services.AddScoped<IRemoteRegisterUseCase, RemoteRegisterUseCase>();
     }
 
     private static void SetService(IServiceCollection services)
     {
         services.AddScoped<IHomeService, HomeService>();
         services.AddScoped<ILoginAuthenticationService, LoginAuthenticationService>();
+        services.AddScoped<IRemoteRegisterService, RemoteRegisterService>();
 
     }
 
@@ -33,6 +34,7 @@ public static class ConfigureUtils
     {
         services.AddScoped<IHomeRepository, HomeRepository>();
         services.AddScoped<ILoginAuthenticationRepository, LoginAuthenticationRepository>();
+        services.AddScoped<IRemoteRegisterRepository, RemoteRegisterRepository>();
 
     }
 }
