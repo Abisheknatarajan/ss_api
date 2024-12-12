@@ -43,6 +43,26 @@ public partial class ApiDbContext : DbContext
             entity.Property(e => e.UserName)
                 .HasMaxLength(255)
                 .IsUnicode(false);
+            entity.Property(e => e.Role)
+            .HasMaxLength(255)
+            .IsUnicode(false);
+        });
+        modelBuilder.Entity<SystemList>(entity =>
+        {
+            entity.HasKey(e => e.Id).HasName("PK__SystemLi__3214EC07283A1E13");
+
+            entity.ToTable("SystemList");
+
+            entity.Property(e => e.RemoteId)
+                .HasMaxLength(255)
+                .IsUnicode(false)
+                .HasColumnName("RemoteID");
+            entity.Property(e => e.RemoteName)
+                .HasMaxLength(255)
+                .IsUnicode(false);
+            entity.Property(e => e.UserBy)
+            .HasMaxLength(255)
+            .IsUnicode(false);
         });
 
         modelBuilder.Entity<SystemList>(entity =>
