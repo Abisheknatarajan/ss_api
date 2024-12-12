@@ -24,5 +24,9 @@ public class UserService : IUserService
     {
         return Repository.userList();
     }
+    public string userBy(UsedByEntity request)
+    {
+        return Repository.userBy(request);
+    }
 
 }

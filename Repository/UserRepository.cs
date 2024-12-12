@@ -61,5 +61,17 @@ public class UserRepository : IUserRepository
 
         return systemList;
     }
+    public string userBy(UsedByEntity request)
+    {
+        var data = Context.SystemLists.FirstOrDefault(u => u.RemoteId == request.RemoteId);
+        if (data != null)
+        {
+            data.UserBy = request.User;
+            Context.SaveChanges();
+            return "User registered successfully.";
+        }
+        return "User registered Unsuccessfully.";
+
+    }
 }
 

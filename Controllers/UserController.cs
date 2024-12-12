@@ -83,17 +83,17 @@ public class UserController : ControllerBase
 
     //     return Ok(new { message = "Update successful" });
     // }
-    [HttpPost("create")]
-    public IActionResult UpdateUsedBy([FromBody] UserDto request)
+    [HttpPut("user-by")]
+    public IActionResult UpdateUsedBy([FromBody] UserByDto request)
     {
-        if (request == null || string.IsNullOrEmpty(request.Name) || string.IsNullOrEmpty(request.Email) || string.IsNullOrEmpty(request.Password))
+        if (request == null || string.IsNullOrEmpty(request.RemoteId) || string.IsNullOrEmpty(request.User))
         {
             _logger.LogWarning("Invalid request received");
             return BadRequest("Invalid request data");
         }
         try
         {
-            var result = _userUseCase.execute(request);
+            var result = _userUseCase.userBy(request);
             return Ok(new { Success = true, Data = result });
         }
         catch (Exception ex)

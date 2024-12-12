@@ -34,4 +34,10 @@ public class UserUseCase : IUserUseCase
         var data = Service.userList();
         return data;
     }
+    public string userBy(UserByDto request)
+    {
+        var data1 = BeanUtil.Copy<UserByDto, UsedByEntity>(request);
+        var data = Service.userBy(data1);
+        return data;
+    }
 }

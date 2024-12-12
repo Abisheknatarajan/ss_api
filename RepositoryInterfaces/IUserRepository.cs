@@ -9,5 +9,6 @@ public interface IUserRepository
     string User(UserEntity request);
     public List<SystemListEntity> usageList();
     public List<UserEntity> userList();
+    string userBy(UsedByEntity request);
 
 }
